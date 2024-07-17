@@ -12,6 +12,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
+    "npm": "^10.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.16.0"
@@ -26,7 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "@vitejs/plugin-react": "4.0.4",
-    "@vitejs/plugin-react-swc": "3.3.2",
+    "@vitejs/plugin-react-swc": "^3.3.2",
     "autoprefixer": "10.4.15",
     "eslint": "^8.49.0",
     "eslint-plugin-react-hooks": "4.6.0",
