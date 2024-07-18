@@ -6,7 +6,7 @@ import { CreateUser } from './routes/signup/create-user/create-user.tsx';
 import { Deposit } from './routes/signup/deposit/deposit.tsx';
 import { JointAccess } from './routes/signup/joint-access/joint-access.tsx';
 import { StockRestrictions } from './routes/signup/stock-restrictions/stock-restrictions.tsx';
-import { CreateAccount } from './routes/create-account/CreateAccount.tsx';
+import { action as createAccountAction, CreateAccount } from './routes/create-account/create-account.tsx';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +15,8 @@ const router = createBrowserRouter([
   },
   {
     path: '/create-account',
-    element: <CreateAccount />
+    element: <CreateAccount />,
+    action: createAccountAction
   },
   {
     path: '/signup/account-selection',
