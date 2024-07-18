@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { FlowLayout } from '../../reusable-components/flow-layout/flow-layout.tsx';
+import { Button } from 'app/frontend/reusable-components/button/button.tsx';
 
 export function Root() {
   return (
     <FlowLayout>
-      <Link to="/signup/account-selection" className="text-xl">
+      <Button href="/create-account">
         Get started
-      </Link>
+      </Button>
     </FlowLayout>
   );
 }
