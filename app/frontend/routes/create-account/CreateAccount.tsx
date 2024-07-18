@@ -11,7 +11,7 @@ export function CreateAccount() {
             <img src=''/>
             <Input label="Username"/>
             <Input label="Password"/>
-            <Button href="/signup/create-user">Create Account</Button>
+            <Button href="/signup/account-selection">Create Account</Button>
         </FlowLayout>
     )
 }
