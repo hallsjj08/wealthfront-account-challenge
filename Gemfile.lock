@@ -133,6 +133,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-proxy (0.7.7)
       rack
     rack-test (2.1.0)
@@ -225,6 +227,7 @@ DEPENDENCIES
   jbuilder (= 2.11.5)
   pry (= 0.14.2)
   puma (~> 5.0)
+  rack-cors
   rails (~> 7.0.8)
   selenium-webdriver (= 4.12.0)
   sprockets-rails (= 3.4.2)
