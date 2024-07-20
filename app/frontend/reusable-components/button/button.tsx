@@ -1,7 +1,8 @@
-import React, { ReactNode } from 'react';
+import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-interface Props {
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit';
   href?: string;
   children: ReactNode;
@@ -9,7 +10,7 @@ interface Props {
 
 const classes = 'inline-block py-3 px-6 bg-[hsla(244,49%,49%,1)] text-white';
 
-export function Button({ href, children, type }: Props) {
+export function Button({ href, children, type, ...props }: Props) {
   if (href) {
     return (
       <Link to={href} className={classes}>
@@ -19,7 +20,7 @@ export function Button({ href, children, type }: Props) {
   }
 
   return (
-    <button type={type} className={classes}>
+    <button type={type} className={classes} {...props}>
       {children}
     </button>
   );

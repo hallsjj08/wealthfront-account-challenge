@@ -10,28 +10,18 @@ interface AuthContextProps {
     user?: User,
     isAuthenticated: boolean,
     handleCreateUser: (username: string, password: string) => Promise<Response>
+    logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextProps>({
     isAuthenticated: false,
-    handleCreateUser: () => Promise.resolve(new Response())
+    handleCreateUser: () => Promise.resolve(new Response()),
+    logout: () => Promise.resolve()
 })
 
 export default function AuthContextProvider({children}: PropsWithChildren) {
     const [user, setAuthenticatedUser] = useState<User | undefined>()
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-    async function checkLoginStatus() {
-        const response = await fetch('http://localhost:3000/logged_in', {
-          credentials: 'include'
-        })
-      
-        const data = await response.json();
-        if (response.ok && data.logged_in) {
-            setAuthenticatedUser(data.user)
-            setIsAuthenticated(true)
-        }
-    }
 
     async function handleCreateUser(username: string, password: string) {
         const data = { 
@@ -59,10 +49,36 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
         return response;
     }
 
+    async function checkLoginStatus() {
+        const response = await fetch('http://localhost:3000/logged_in', {
+          credentials: 'include'
+        })
+      
+        const data = await response.json();
+        if (response.ok && data.logged_in) {
+            setAuthenticatedUser(data.user)
+            setIsAuthenticated(true)
+        }
+    }
+
+    async function logout() {
+        const response = await fetch('http://localhost:3000/logout', {
+            method: 'DELETE',
+            credentials: 'include'
+          })
+        
+          const data = await response.json();
+          if (response.ok && !data.logged_in) {
+              setAuthenticatedUser(undefined)
+              setIsAuthenticated(false)
+          }
+    }
+
     const context: AuthContextProps = {
         user,
         isAuthenticated,
-        handleCreateUser
+        handleCreateUser,
+        logout
     }
 
     useEffect(() => {
