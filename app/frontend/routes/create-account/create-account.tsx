@@ -25,20 +25,23 @@ export function CreateAccount() {
             // handle errors
         }
     }
-
-    if (isAuthenticated) return <Navigate to="/signup/account-selection" />
     
     return (
-        <Card maxWidth='max-w-[500px]'>
-            <Form onSubmit={(e: FormEvent<UserForm>) => handleSubmit(e)} method="post" action="/create-account">
-                <div className="flex items-center justify-center">
-                    <img className=" w-12 h-12" src='Wealthfront_Logo.png'/>
-                </div>
-                <h1 className=" my-4 text-3xl font-bold text-center">Create New Account</h1>
-                <Input name="username" label="Username"/>
-                <Input name="password" label="Password"/>
-                <Button type='submit' fullwidth>Create Account</Button>
-            </Form>
-        </Card>
+        <>
+        {isAuthenticated && <Navigate to="/signup/account-selection" />}
+        {!isAuthenticated && (
+            <Card maxWidth='max-w-[500px]'>
+                <Form onSubmit={(e: FormEvent<UserForm>) => handleSubmit(e)} method="post" action="/create-account">
+                    <div className="flex items-center justify-center">
+                        <img className=" w-12 h-12" src='Wealthfront_Logo.png'/>
+                    </div>
+                    <h1 className=" my-4 text-3xl font-bold text-center">Create New Account</h1>
+                    <Input name="username" label="Username"/>
+                    <Input name="password" label="Password"/>
+                    <Button type='submit' fullwidth>Create Account</Button>
+                </Form>
+            </Card>
+        )}
+        </>
     )
 }

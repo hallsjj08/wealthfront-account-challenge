@@ -50,7 +50,7 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
     }
 
     async function checkLoginStatus() {
-        const response = await fetch('http://localhost:3000/logged_in', {
+        const response = await fetch('http://localhost:3000/api/logged-in', {
           credentials: 'include'
         })
       
@@ -62,7 +62,7 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
     }
 
     async function logout() {
-        const response = await fetch('http://localhost:3000/logout', {
+        const response = await fetch('http://localhost:3000/api/logout', {
             method: 'DELETE',
             credentials: 'include'
           })
