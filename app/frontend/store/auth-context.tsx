@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
+import React, { createContext, PropsWithChildren, useEffect, useState } from "react";
 
 interface User {
     id: number,
@@ -13,7 +13,7 @@ interface AuthContextProps {
     logout: () => Promise<void>
 }
 
-const AuthContext = createContext<AuthContextProps>({
+export const AuthContext = createContext<AuthContextProps>({
     isAuthenticated: false,
     handleCreateUser: () => Promise.resolve(new Response()),
     logout: () => Promise.resolve()
@@ -90,8 +90,4 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
             {children}
         </AuthContext.Provider>
     )
-}
-
-export const useAuth = () => {
-    return useContext(AuthContext)
 }

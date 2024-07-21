@@ -8,39 +8,48 @@ import { JointAccess } from './routes/signup/joint-access/joint-access.tsx';
 import { StockRestrictions } from './routes/signup/stock-restrictions/stock-restrictions.tsx';
 import { CreateAccount } from './routes/create-account/create-account.tsx';
 import ProtectedRoute from './routes/protected-route.tsx';
+import GettingStarted from './routes/root/getting-started.tsx';
+import ErrorBoundary from './routes/error-boundary.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-  },
-  {
-    path: '/create-account',
-    element: <CreateAccount />,
-  },
-  {
-    path: '/signup',
-    element: <ProtectedRoute/>,
+    errorElement: <ErrorBoundary/>,
     children: [
       {
-        path: 'account-selection',
-        element: <AccountSelection />,
+        index: true,
+        element: <GettingStarted />
       },
       {
-        path: 'create-user',
-        element: <CreateUser />,
+        path: 'create-account',
+        element: <CreateAccount />,
       },
       {
-        path: 'joint-access',
-        element: <JointAccess />,
-      },
-      {
-        path: 'stock-restrictions',
-        element: <StockRestrictions />,
-      },
-      {
-        path: 'deposit',
-        element: <Deposit />,
+        path: 'signup',
+        element: <ProtectedRoute/>,
+        children: [
+          {
+            path: 'account-selection',
+            element: <AccountSelection />,
+          },
+          {
+            path: 'create-user',
+            element: <CreateUser />,
+          },
+          {
+            path: 'joint-access',
+            element: <JointAccess />,
+          },
+          {
+            path: 'stock-restrictions',
+            element: <StockRestrictions />,
+          },
+          {
+            path: 'deposit',
+            element: <Deposit />,
+          },
+        ]
       },
     ]
   },

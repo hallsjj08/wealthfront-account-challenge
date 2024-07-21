@@ -1,9 +1,9 @@
 import React, { FormEvent } from "react";
-import { FlowLayout } from "app/frontend/reusable-components/flow-layout/flow-layout";
 import { Button } from "app/frontend/reusable-components/button/button";
 import { Input } from "app/frontend/reusable-components/input/input";
 import { Form, Navigate } from "react-router-dom";
-import { useAuth } from "app/frontend/store/auth-context";
+import { Card } from "app/frontend/reusable-components/card/card";
+import { useAuth } from "app/frontend/store/useAuth";
 
 interface FormElements extends HTMLFormControlsCollection {
     username: HTMLInputElement,
@@ -29,7 +29,7 @@ export function CreateAccount() {
     if (isAuthenticated) return <Navigate to="/signup/account-selection" />
     
     return (
-        <FlowLayout>
+        <Card title="Create New Account">
             <Form onSubmit={(e: FormEvent<UserForm>) => handleSubmit(e)} method="post" action="/create-account">
                 <h1>Create New Account</h1>
                 <img src=''/>
@@ -37,6 +37,6 @@ export function CreateAccount() {
                 <Input name="password" label="Password"/>
                 <Button type='submit'>Create Account</Button>
             </Form>
-        </FlowLayout>
+        </Card>
     )
 }

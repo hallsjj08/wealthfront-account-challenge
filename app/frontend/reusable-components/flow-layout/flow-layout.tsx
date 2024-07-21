@@ -1,6 +1,6 @@
-import { useAuth } from 'app/frontend/store/auth-context';
 import React, { ReactNode } from 'react';
 import { Button } from '../button/button';
+import { useAuth } from 'app/frontend/store/useAuth';
 
 interface Props {
   children: ReactNode;
