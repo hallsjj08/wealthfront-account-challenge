@@ -32,8 +32,8 @@ export function CreateAccount() {
                         <img className=" w-12 h-12" src='Wealthfront_Logo.png'/>
                     </div>
                     <h1 className=" my-4 text-3xl font-bold text-center">Create New Account</h1>
-                    <Input required name="username" label="Username" type="text"/>
-                    <Input required name="password" label="Password" type="password"/>
+                    <Input required name="username" label="Username" type="text" pattern="[0-9a-zA-Z]{10,50}" error="Must be between 10 and 50 characters (inclusive)."/>
+                    <Input required name="password" label="Password" type="password" pattern="[0-9a-zA-Z]{20,50}" error="Must be between 20 and 50 characters (inclusive) and contain one letter and one number."/>
                     <Button type='submit' fullwidth>Create Account</Button>
                 </Form>
             </Card>
