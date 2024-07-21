@@ -9,7 +9,7 @@ import { StockRestrictions } from './routes/signup/stock-restrictions/stock-rest
 import { CreateAccount } from './routes/create-account/create-account.tsx';
 import ProtectedRoute from './routes/protected-route.tsx';
 import GettingStarted from './routes/root/getting-started.tsx';
-import ErrorBoundary from './routes/error-boundary.tsx';
+import ErrorBoundary from './routes/error/error-boundary.tsx';
 
 const router = createBrowserRouter([
   {
