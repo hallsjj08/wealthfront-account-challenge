@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  
-  match '*unmatched', to: 'application#render_react', via: :all
 
   resources :sessions, only: [:create]
   delete :logout, to: "sessions#logout"
@@ -14,4 +12,6 @@ Rails.application.routes.draw do
   namespace :api do
       resources :accounts, path: 'create-account', only: [:create]
   end
+
+  match '*unmatched', to: 'application#render_react', via: :all
 end

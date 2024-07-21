@@ -9,13 +9,15 @@ interface Props {
 export function FlowLayout({ children }: Props) {
   const {isAuthenticated, logout} = useAuth();
   return (
-    <div className="h-full mt-5 max-w-[1000px] mx-auto">
+    <div className='flex-col items-center justify-center'>
       {isAuthenticated && (
-        <div className="w-full text-right">
-          <Button type='button' onClick={logout}>Logout</Button>
-        </div>
-      )}
-      {children}
+          <div className=" w-full text-right m-4">
+            <Button type='button' onClick={logout}>Logout</Button>
+          </div>
+        )}
+      <div className=" h-full mt-5 max-w-[1000px] mx-auto flex items-center justify-center">
+        {children}
+      </div>
     </div>
   );
 }

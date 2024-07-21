@@ -15,12 +15,12 @@ export function Input({ onChange, label, name }: Props) {
     onChange?.(event.target.value);
   }
   return (
-    <div>
-      <label className="block text-sm">{label}</label>
+    <div className='my-4'>
+      <label className=" text-neutral-500 block text-sm mb-1">{label}</label>
       <input
         id={id}
         name={name}
-        className="block w-full p-2 border-4 border-solid border-slate-300"
+        className="block w-full p-1 border-b focus:outline-none focus:ring-2 rounded-md"
         value={value}
         onChange={handleChange}
       />
