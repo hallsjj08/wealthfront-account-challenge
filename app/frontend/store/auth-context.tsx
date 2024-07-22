@@ -47,9 +47,8 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
         })
 
         const responseData = await response.json()
-        console.log(response.status);
         if (response.ok) {
-            setAuthenticatedUser(JSON.parse(responseData).user);
+            setAuthenticatedUser(responseData.user);
             setIsAuthenticated(true);
             return Promise.resolve<UserValidationError[]>([]);
         } else if (response.status === 422) {
