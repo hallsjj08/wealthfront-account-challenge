@@ -1,12 +1,13 @@
-import React, { ChangeEvent, InputHTMLAttributes, useState } from 'react';
+import React, { ChangeEvent, InputHTMLAttributes, ReactNode, useState } from 'react';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
   onHandleChange?: (value: string) => void;
+  PasswordScore?: ReactNode,
 }
 
-export function Input({ onHandleChange, label, error, ...inputProps }: Props) {
+export function Input({ onHandleChange, label, error, PasswordScore, ...inputProps }: Props) {
   const [value, setValue] = useState('');
   const [focused, setFocused] = useState(false)
   const id = label.replace(/ /gm, '_');
@@ -38,7 +39,8 @@ export function Input({ onHandleChange, label, error, ...inputProps }: Props) {
           onBlur={handleFocus} 
           onFocus={handleSelectInput}
         />
-        <span className='text-red-600 hidden'>{error}</span>
+        {PasswordScore}
+        <span className='text-red-600 hidden text-xs'>{error}</span>
       </div>
     </div>
   );

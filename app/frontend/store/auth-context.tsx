@@ -6,16 +6,22 @@ interface User {
     password: string,
 }
 
+interface UserValidationError {
+    type: string,
+    field: string,
+    message: string
+}
+
 interface AuthContextProps {
     user?: User,
     isAuthenticated: boolean,
-    handleCreateUser: (username: string, password: string) => Promise<Response>
+    handleCreateUser: (username: string, password: string) => Promise<UserValidationError[]>
     logout: () => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextProps>({
     isAuthenticated: false,
-    handleCreateUser: () => Promise.resolve(new Response()),
+    handleCreateUser: () => Promise.resolve([]),
     logout: () => Promise.resolve()
 })
 
@@ -41,12 +47,16 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
         })
 
         const responseData = await response.json()
+        console.log(response.status);
         if (response.ok) {
-            setAuthenticatedUser(responseData.user);
-            setIsAuthenticated(true)
+            setAuthenticatedUser(JSON.parse(responseData).user);
+            setIsAuthenticated(true);
+            return Promise.resolve<UserValidationError[]>([]);
+        } else if (response.status === 422) {
+            return Promise.resolve<UserValidationError[]>(responseData.errors.map((error: string) => JSON.parse(error)))
+        } else {
+            throw response
         }
-
-        return response;
     }
 
     async function checkLoginStatus() {
@@ -58,6 +68,8 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
         if (response.ok && data.logged_in) {
             setAuthenticatedUser(data.user)
             setIsAuthenticated(true)
+        } else if (!response.ok){
+            console.error("CreateAccount: ", "method: checkLoginStatus", response, data)
         }
     }
 
@@ -71,6 +83,8 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
           if (response.ok && !data.logged_in) {
               setAuthenticatedUser(undefined)
               setIsAuthenticated(false)
+          } else if (!response.ok) {
+            throw Promise.resolve(response);
           }
     }
 

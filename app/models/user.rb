@@ -30,7 +30,7 @@ class User < ApplicationRecord
     else
       passwordStrength = Zxcvbn.test(password)
       if (passwordStrength['score'] < 2)
-        error['message'] = "Weak Password: #{passwordStrength['feedback']['suggestions']} Please reference https://github.com/dropbox/zxcvbn/blob/master/README.md for more information"
+        error['message'] = "Password strength is not strong enough. To make password strong, user upper and lower case letters, numbers, and symbols link !\"?$"
       end
     end
 
