@@ -14,7 +14,7 @@ interface UserFormElements extends HTMLFormControlsCollection {
 }
 
 export function CreateAccount() {
-    const { isAuthenticated, handleCreateUser } = useAuth();
+    const { user, handleCreateUser } = useAuth();
     const timer = useRef<NodeJS.Timeout | undefined>();
     const [score, setScore] = useState(-1)
     const [errorMessages, setErrorMessages] = useState<string[]>([])
@@ -63,11 +63,12 @@ export function CreateAccount() {
             setScore(-1)
         }
     }
+
+    if (user === null) return null
     
     return (
         <>
-        {isAuthenticated && <Navigate to="/signup/account-selection" />}
-        {!isAuthenticated && (
+        {user ? <Navigate to="/signup/account-selection" /> : (
             <Card maxWidth='max-w-[500px]'>
                 <Form<UserFormElements> onSubmit={(e) => handleSubmit(e)} method="post" action="/create-account">
                     <div className="flex items-center justify-center">

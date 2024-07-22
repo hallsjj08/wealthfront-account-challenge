@@ -13,21 +13,18 @@ interface UserValidationError {
 }
 
 interface AuthContextProps {
-    user?: User,
-    isAuthenticated: boolean,
+    user?: User | null,
     handleCreateUser: (username: string, password: string) => Promise<UserValidationError[]>
-    logout: () => Promise<void>
+    logout: () => Promise<void>,
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-    isAuthenticated: false,
     handleCreateUser: () => Promise.resolve([]),
-    logout: () => Promise.resolve()
+    logout: () => Promise.resolve(),
 })
 
 export default function AuthContextProvider({children}: PropsWithChildren) {
-    const [user, setAuthenticatedUser] = useState<User | undefined>()
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [user, setAuthenticatedUser] = useState<User | undefined | null>(null)
 
     async function handleCreateUser(username: string, password: string) {
         const data = { 
@@ -49,7 +46,6 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
         const responseData = await response.json()
         if (response.ok) {
             setAuthenticatedUser(responseData.user);
-            setIsAuthenticated(true);
             return Promise.resolve<UserValidationError[]>([]);
         } else if (response.status === 422) {
             return Promise.resolve<UserValidationError[]>(responseData.errors.map((error: string) => JSON.parse(error)))
@@ -66,9 +62,11 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
         const data = await response.json();
         if (response.ok && data.logged_in) {
             setAuthenticatedUser(data.user)
-            setIsAuthenticated(true)
-        } else if (!response.ok){
-            console.error("CreateAccount: ", "method: checkLoginStatus", response, data)
+        } else {
+            if (!response.ok){
+                console.error("CreateAccount: ", "method: checkLoginStatus", response, data)
+            }
+            setAuthenticatedUser(undefined)
         }
     }
 
@@ -81,7 +79,6 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
           const data = await response.json();
           if (response.ok && !data.logged_in) {
               setAuthenticatedUser(undefined)
-              setIsAuthenticated(false)
           } else if (!response.ok) {
             throw Promise.resolve(response);
           }
@@ -89,9 +86,8 @@ export default function AuthContextProvider({children}: PropsWithChildren) {
 
     const context: AuthContextProps = {
         user,
-        isAuthenticated,
         handleCreateUser,
-        logout
+        logout,
     }
 
     useEffect(() => {

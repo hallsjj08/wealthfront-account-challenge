@@ -3,8 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../store/useAuth";
 
 export default function ProtectedRoute() {
-    const {isAuthenticated} = useAuth();
+    const {user} = useAuth();
 
-    if (!isAuthenticated) return <Navigate to="/create-account" />
-    return <Outlet/>
+    if (user === null) return null
+
+    return (!user ? <Navigate to="/create-account" /> : <Outlet/>)
 }

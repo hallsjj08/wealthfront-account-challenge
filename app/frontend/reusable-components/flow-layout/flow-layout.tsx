@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function FlowLayout({ children }: Props) {
-  const {isAuthenticated, logout} = useAuth();
+  const {user, logout} = useAuth();
   const [errorMessage, setErrorMessage] = useState<string | undefined>()
 
   function handleLogout() {
@@ -20,7 +20,7 @@ export function FlowLayout({ children }: Props) {
   
   return (
     <div className='flex-col items-center justify-center'>
-      {isAuthenticated && (
+      {user && (
           <div className=" w-full text-right m-4">
             <Button type='button' onClick={handleLogout}>Logout</Button>
           </div>
