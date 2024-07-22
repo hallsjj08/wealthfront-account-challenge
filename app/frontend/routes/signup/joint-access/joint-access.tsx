@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '../../../reusable-components/card/card.tsx';
-import CustomerInfo from 'app/frontend/reusable-components/customer-info/customer-info.tsx';
+import CustomerInfo from '../../../reusable-components/customer-info/customer-info.tsx';
 
 export function JointAccess() {
   return (

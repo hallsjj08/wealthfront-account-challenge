@@ -20,12 +20,12 @@ export default function AccountTypes() {
         <>
             {ACCOUNT_TYPES.map(({key, to, label}, i) => {
                 return (
-                    <>
+                    <div key={key + "-div"}>
                     <Link key={key} to={to} className="text-gray-500 block hover:bg-purple-50 transform-[background-color] duration-100 ease-in p-4 pl-2 rounded-2xl">
                         {label}
                     </Link>
-                    {i != ACCOUNT_TYPES.length - 1 && <div key={key + "-" + i} className="bg-slate-200 h-px w-full" />}
-                    </>
+                    {i != ACCOUNT_TYPES.length - 1 && <div key={key + "-separator"} className="bg-slate-200 h-px w-full" />}
+                    </div>
                 )
             })}
         </>

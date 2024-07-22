@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '../../../reusable-components/card/card.tsx';
-import CardContent from 'app/frontend/reusable-components/card/card-content.tsx';
+import CardContent from '../../../reusable-components/card/card-content.tsx';
 import AccountTypes from './account-types.tsx';
 
 export function AccountSelection() {

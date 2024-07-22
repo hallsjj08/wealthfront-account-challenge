@@ -2,7 +2,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "password_strength" do
     post '/api/create-account', params: {user: { username: '1234567890', password: 'passwordpassword123456' }}
     assert_response :unprocessable_entity
-    assert_equal JSON.parse(response.body)['errors'][0], "{\"type\":\"ValidationError\",\"field\":\"password\",\"message\":\"Weak Password: [\\\"Add another word or two. Uncommon words are better.\\\", \\\"Avoid repeated words and characters\\\"] Please reference https://github.com/dropbox/zxcvbn/blob/master/README.md for more information\"}"
+    assert_equal JSON.parse(response.body)['errors'][0], "{\"type\":\"ValidationError\",\"field\":\"password\",\"message\":\"Password strength is not strong enough. To make password strong, user upper and lower case letters, numbers, and symbols link !\\\"?$\"}"
   end
 
   test "create_account fails with missing username" do
@@ -50,6 +50,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "create_account succeeds with valid username and password" do
     post '/api/create-account', params: {user: { username: '1234567890', password: 'This#is@Str0ngP@Ssw0rd' }}
     assert_response :success
-    assert_equal JSON.parse(response.body)['success'], true
+    assert_equal JSON.parse(response.body)['logged_in'], true
   end
 end
