@@ -30,7 +30,7 @@ class User < ApplicationRecord
     else
       passwordStrength = Zxcvbn.test(password)
       if (passwordStrength['score'] < 2)
-        error['message'] = "Password strength is not strong enough. To make password strong, user upper and lower case letters, numbers, and symbols link !\"?$"
+        error['message'] = "Password is not strong enough. To make password stronger, use upper and lower case letters, numbers, and special characters."
       end
     end
 

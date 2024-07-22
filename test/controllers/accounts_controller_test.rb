@@ -2,7 +2,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "password_strength" do
     post '/api/create-account', params: {user: { username: '1234567890', password: 'passwordpassword123456' }}
     assert_response :unprocessable_entity
-    assert_equal JSON.parse(response.body)['errors'][0], "{\"type\":\"ValidationError\",\"field\":\"password\",\"message\":\"Password strength is not strong enough. To make password strong, user upper and lower case letters, numbers, and symbols link !\\\"?$\"}"
+    assert_equal JSON.parse(response.body)['errors'][0], "{\"type\":\"ValidationError\",\"field\":\"password\",\"message\":\"Password is not strong enough. To make password stronger, use upper and lower case letters, numbers, and special characters.\"}"
   end
 
   test "create_account fails with missing username" do
