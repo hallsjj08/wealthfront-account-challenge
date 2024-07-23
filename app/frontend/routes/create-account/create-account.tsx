@@ -3,10 +3,10 @@ import { Button } from 'app/frontend/reusable-components/button/button';
 import { Input } from 'app/frontend/reusable-components/input/input';
 import { Navigate } from 'react-router-dom';
 import { Card } from 'app/frontend/reusable-components/card/card';
-import { useAuth } from 'app/frontend/store/useAuth';
 import { Form, FormElement } from 'app/frontend/reusable-components/form/form';
 import PasswordStrengthScore from './password-strength-score';
 import ErrorMessage from 'app/frontend/reusable-components/errors/error-message';
+import useAuthContext from 'app/frontend/store/useAuthContext';
 
 interface UserFormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
@@ -14,7 +14,7 @@ interface UserFormElements extends HTMLFormControlsCollection {
 }
 
 export function CreateAccount() {
-  const { user, handleCreateUser } = useAuth();
+  const { user, handleCreateUser } = useAuthContext();
   const timer = useRef<NodeJS.Timeout | undefined>();
   const [score, setScore] = useState(-1);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
@@ -24,6 +24,7 @@ export function CreateAccount() {
     const { username, password } = e.currentTarget.elements;
     try {
       const errors = await handleCreateUser(username.value, password.value);
+      console.log(errors);
       if (errors.length) {
         setErrorMessages(errors.map(({ message }) => message));
       }

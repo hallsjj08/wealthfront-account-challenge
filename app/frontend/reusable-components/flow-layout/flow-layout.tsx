@@ -1,14 +1,14 @@
 import React, { ReactNode, useState } from 'react';
 import { Button } from '../button/button';
-import { useAuth } from 'app/frontend/store/useAuth';
 import ErrorMessage from '../errors/error-message';
+import useAuthContext from 'app/frontend/store/useAuthContext';
 
 interface Props {
   children: ReactNode;
 }
 
 export function FlowLayout({ children }: Props) {
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuthContext();
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
   function handleLogout() {
