@@ -4,8 +4,8 @@ import CustomerInfo from '../../../reusable-components/customer-info/customer-in
 
 export function CreateUser() {
   return (
-      <Card title="What's your first and last name?">
-        <CustomerInfo to="/signup/joint-access"/>
-      </Card>
+    <Card title="What's your first and last name?">
+      <CustomerInfo to="/signup/joint-access" />
+    </Card>
   );
 }

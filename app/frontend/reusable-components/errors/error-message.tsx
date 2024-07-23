@@ -1,11 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
 interface ErrorMessageProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-export default function ErrorMessage({children}: ErrorMessageProps) {
-    return (
-        <p className="text-red-500 text-sm">{children}</p>
-    )
+export default function ErrorMessage({ children }: ErrorMessageProps) {
+  return <p className="text-red-500 text-sm">{children}</p>;
 }

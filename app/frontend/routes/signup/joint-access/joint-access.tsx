@@ -4,11 +4,11 @@ import CustomerInfo from '../../../reusable-components/customer-info/customer-in
 
 export function JointAccess() {
   return (
-      <Card
-        title="Will this be a joint account?"
-        description="Joint accounts allow for a secondary account holder which provides the same level of access as the primary."
-      >
-        <CustomerInfo to="/signup/stock-restrictions"/>
-      </Card>
+    <Card
+      title="Will this be a joint account?"
+      description="Joint accounts allow for a secondary account holder which provides the same level of access as the primary."
+    >
+      <CustomerInfo to="/signup/stock-restrictions" />
+    </Card>
   );
 }

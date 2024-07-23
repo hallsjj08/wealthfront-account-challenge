@@ -15,11 +15,11 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <ErrorBoundary/>,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         index: true,
-        element: <GettingStarted />
+        element: <GettingStarted />,
       },
       {
         path: 'create-account',
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: <ProtectedRoute/>,
+        element: <ProtectedRoute />,
         children: [
           {
             path: 'account-selection',
@@ -49,9 +49,9 @@ const router = createBrowserRouter([
             path: 'deposit',
             element: <Deposit />,
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
 ]);
 

@@ -8,11 +8,11 @@ describe('CreateUser', () => {
   test('render', () => {
     const router = createBrowserRouter([
       {
-        path: "/",
-        element: <CreateUser />
-      }
-    ])
-    render(<RouterProvider router={router}/>);
+        path: '/',
+        element: <CreateUser />,
+      },
+    ]);
+    render(<RouterProvider router={router} />);
     screen.getByText('First name');
     screen.getByText('Last name');
   });
