@@ -1,9 +1,9 @@
 import { afterAll, beforeAll, describe, expect, jest, test } from '@jest/globals';
 import { renderHook } from '@testing-library/react';
-import { useAuth } from './useAuth';
+import { useAuth } from '../useAuth';
 import { act } from 'react-dom/test-utils';
 import { afterEach } from 'node:test';
-import { User, UserValidationError } from './user.type';
+import { User, UserValidationError } from '../user.type';
 
 describe('useAuth', () => {
   let originalFetch: typeof global.fetch | undefined;
