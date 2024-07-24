@@ -14,6 +14,7 @@ describe('useAuth', () => {
 
   afterEach(() => {
     (global.fetch as jest.Mock).mockClear();
+    (global.fetch as jest.Mock).mockReset();
   });
 
   afterAll(() => {

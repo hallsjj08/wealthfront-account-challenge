@@ -1,13 +1,13 @@
 import React, { ChangeEvent, InputHTMLAttributes, ReactNode, useState } from 'react';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
   onHandleChange?: (value: string) => void;
   PasswordScore?: ReactNode;
 }
 
-export function Input({ onHandleChange, label, error, PasswordScore, ...inputProps }: Props) {
+export function Input({ onHandleChange, label, error, PasswordScore, ...inputProps }: InputProps) {
   const [value, setValue] = useState('');
   const [focused, setFocused] = useState(false);
   const id = label.replace(/ /gm, '_');
@@ -27,7 +27,9 @@ export function Input({ onHandleChange, label, error, PasswordScore, ...inputPro
 
   return (
     <div className="my-4">
-      <label className=" text-neutral-500 block text-sm mb-1">{label}</label>
+      <label htmlFor={id} className=" text-neutral-500 block text-sm mb-1">
+        {label}
+      </label>
       <div>
         <input
           {...inputProps}

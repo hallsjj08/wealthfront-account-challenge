@@ -6,7 +6,7 @@ function parseResponse<K>(json: unknown): K | undefined {
   try {
     if (json !== undefined && json != null && typeof json === 'string') data = JSON.parse(json.toString());
   } catch (e) {
-    console.error('Error unmarshalling data.', e, json);
+    console.log('Error unmarshalling data.', e, json);
     throw e;
   }
   return data;
@@ -50,7 +50,7 @@ export const useAuth = () => {
       }
     } catch (e) {
       // send error to remote logs
-      console.error('userAuth', 'method: handleCreateUser', 'Error attempting to create user', e);
+      console.log('userAuth', 'method: handleCreateUser', 'Error attempting to create user', e);
       throw e;
     }
   }
@@ -66,14 +66,10 @@ export const useAuth = () => {
         const data = json as UserResponse;
         data?.logged_in && data?.user ? setAuthenticatedUser({ ...data.user }) : setAuthenticatedUser(undefined);
       } else {
-        if (!response.ok) {
-          // report error to remote logging
-          console.error('useAuth:', 'method: checkLoginStatus', response, json);
-        }
-        setAuthenticatedUser(undefined);
+        throw response;
       }
     } catch (e) {
-      console.error('useAuth:', 'method: checkLoginStatus', e);
+      console.log('useAuth:', 'method: checkLoginStatus', e);
       setAuthenticatedUser(undefined);
     }
   }, []);
@@ -93,7 +89,7 @@ export const useAuth = () => {
         throw response;
       }
     } catch (e) {
-      console.error('useAuth:', 'method: logout', e);
+      console.log('useAuth:', 'method: logout', e);
       throw e;
     }
   }

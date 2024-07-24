@@ -2,7 +2,7 @@ import React from 'react';
 import { jest, test, describe } from '@jest/globals';
 import { render } from '@testing-library/react';
 import AuthContextProvider from '../auth-context-provider';
-import useAuthContext from '../useAuthContext';
+import { useAuthContext } from '../useAuthContext';
 
 const mockUseAuth = {
   user: null,

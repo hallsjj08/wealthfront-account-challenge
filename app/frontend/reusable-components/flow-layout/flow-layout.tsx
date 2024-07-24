@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { Button } from '../button/button';
 import ErrorMessage from '../errors/error-message';
-import useAuthContext from 'app/frontend/store/useAuthContext';
+import { useAuthContext } from 'app/frontend/store/useAuthContext';
 
 interface Props {
   children: ReactNode;
@@ -13,7 +13,7 @@ export function FlowLayout({ children }: Props) {
 
   function handleLogout() {
     logout().catch((e) => {
-      console.error(e);
+      console.log(e);
       setErrorMessage('Unable to log out. Please refresh the page and try again.');
     });
   }

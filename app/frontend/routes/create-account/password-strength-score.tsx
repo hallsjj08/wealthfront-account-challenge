@@ -9,7 +9,6 @@ export default function PasswordStrengthScore({ score }: PasswordScoreProps) {
   let label = 'Strength';
   let width = 'w-full';
 
-  console.log(score);
   switch (score) {
     case 0:
     case 1:
